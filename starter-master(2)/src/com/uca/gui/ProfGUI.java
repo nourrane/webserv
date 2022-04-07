@@ -1,7 +1,7 @@
 package com.uca.gui;
 
-import com.uca.core.UserCore;
-import com.uca.entity.UserEntity;
+import com.uca.core.ProfCore;
+import com.uca.entity.ProfEntity;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -13,29 +13,29 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UserGUI {
-
-    public static String getAllUsers() throws IOException, TemplateException {
+public class ProfGUI {
+    
+    public static String getAllProfs() throws IOException, TemplateException {
         Configuration configuration = _FreeMarkerInitializer.getContext();
 
         Map<String, Object> input = new HashMap<>();
 
-        input.put("users", UserCore.getAllUsers());
+        input.put("professeurs", ProfCore.getAllProfs());
 
         Writer output = new StringWriter();
-        Template template = configuration.getTemplate("users/users.ftl");
+        Template template = configuration.getTemplate("professeurs/professeurs.ftl");
         template.setOutputEncoding("UTF-8");
         template.process(input, output);
 
         return output.toString();
     }
-    public static UserEntity addUsers(UserEntity obj) throws IOException, TemplateException {
+    public static ProfEntity addProf(ProfEntity obj) throws IOException, TemplateException {
         
-        return UserCore.addUsers(obj);
+        return ProfCore.addProf(obj);
     }
-    public static void deleteUsers(UserEntity obj) throws IOException, TemplateException {
+    public static void deleteProfs(ProfEntity obj) throws IOException, TemplateException {
         
-       UserCore.deleteUsers(obj);
-    }
+        ProfCore.deleteProfs(obj);
+     }
     
 }

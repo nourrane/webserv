@@ -16,5 +16,9 @@ public class UserCore {
         UserEntity e=u.create(obj);
         return e ;
     }
+    public static void deleteUsers(UserEntity obj) {
+        UserDAO u=new UserDAO();
+        u.delete(obj);
+    }
 
 }

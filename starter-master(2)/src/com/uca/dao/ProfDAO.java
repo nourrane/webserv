@@ -1,19 +1,19 @@
 package com.uca.dao;
 
-import com.uca.entity.UserEntity;
+import com.uca.entity.ProfEntity;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-public class UserDAO extends _Generic<UserEntity> {
+public class ProfDAO extends _Generic<ProfEntity> {
 
-    public ArrayList<UserEntity> getAllUsers() {
-        ArrayList<UserEntity> entities = new ArrayList<>();
+    public ArrayList<ProfEntity> getAllProfs() {
+        ArrayList<ProfEntity> entities = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = this.connect.prepareStatement("SELECT * FROM users ORDER BY id ASC;");
+            PreparedStatement preparedStatement = this.connect.prepareStatement("SELECT * FROM professeurs ORDER BY id ASC;");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                UserEntity entity = new UserEntity();
+                ProfEntity entity = new ProfEntity();
                 entity.setId(resultSet.getInt("id"));
                 entity.setFirstName(resultSet.getString("firstname"));
                 entity.setLastName(resultSet.getString("lastname"));
@@ -28,13 +28,13 @@ public class UserDAO extends _Generic<UserEntity> {
     }
 
     @Override
-    public UserEntity create(UserEntity obj) {
+    public ProfEntity create(ProfEntity obj) {
         
         Connection connection = _Connector.getInstance();
         
         try {
             PreparedStatement statement;
-            statement = connection.prepareStatement("INSERT INTO users(firstname, lastname) VALUES(?, ?);");
+            statement = connection.prepareStatement("INSERT INTO professeurs(firstname, lastname) VALUES(?, ?);");
             statement.setString(1, obj.getFirstName());
             statement.setString(2, obj.getLastName());
             statement.executeUpdate();
@@ -47,18 +47,18 @@ public class UserDAO extends _Generic<UserEntity> {
     }
 
     @Override
-    public void delete(UserEntity obj) {
+    public void delete(ProfEntity obj) {
         Connection connection = _Connector.getInstance();
         
         try {
             PreparedStatement statement;
-            statement = connection.prepareStatement("DELETE FROM users WHERE id=?;");
+            statement = connection.prepareStatement("DELETE FROM professeurs WHERE id=?;");
             statement.setString(1,""+obj.getId());
             statement.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println(e.toString());
-            throw new RuntimeException("could not delete the user!");
+            throw new RuntimeException("could not delete the professor!");
         }
     }
 }

@@ -1,7 +1,7 @@
 package com.uca.gui;
 
-import com.uca.core.UserCore;
-import com.uca.entity.UserEntity;
+import com.uca.core.EleveCore;
+import com.uca.entity.EleveEntity;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -13,29 +13,29 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UserGUI {
-
-    public static String getAllUsers() throws IOException, TemplateException {
+public class EleveGUI {
+    
+    public static String getAllEleves() throws IOException, TemplateException {
         Configuration configuration = _FreeMarkerInitializer.getContext();
 
         Map<String, Object> input = new HashMap<>();
 
-        input.put("users", UserCore.getAllUsers());
+        input.put("eleves", EleveCore.getAllEleves());
 
         Writer output = new StringWriter();
-        Template template = configuration.getTemplate("users/users.ftl");
+        Template template = configuration.getTemplate("eleves/eleves.ftl");
         template.setOutputEncoding("UTF-8");
         template.process(input, output);
 
         return output.toString();
     }
-    public static UserEntity addUsers(UserEntity obj) throws IOException, TemplateException {
+    public static EleveEntity addEleves(EleveEntity obj) throws IOException, TemplateException {
         
-        return UserCore.addUsers(obj);
+        return EleveCore.addEleve(obj);
     }
-    public static void deleteUsers(UserEntity obj) throws IOException, TemplateException {
+    public static void deleteEleves(EleveEntity obj) throws IOException, TemplateException {
         
-       UserCore.deleteUsers(obj);
-    }
+        EleveCore.deleteEleve(obj);
+     }
     
 }
