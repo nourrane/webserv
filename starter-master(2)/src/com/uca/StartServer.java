@@ -5,7 +5,15 @@ import com.uca.gui.*;
 import com.uca.entity.UserEntity;
 import com.uca.entity.EleveEntity;
 import com.uca.entity.ProfEntity;
+import com.uca.entity.GomEntity;
 import static spark.Spark.*;
+
+/**
+ * GET "http://localhost:8081/professeurs" #liste des profs
+ * GET "http://localhost:8081/eleves" #liste des élèves
+ * GET "http://localhost:8081/gommettes/" #liste des gommettes
+ * GET "http://localhost:8081/professeurs/?id=1" # affiche nom prenom prof id=1
+ */
 
 public class StartServer {
 
@@ -30,6 +38,25 @@ public class StartServer {
 
         get("/professeurs", (req, res) -> {
             return ProfGUI.getAllProfs();
+        });
+
+        get("/gommettes", (req, res) -> {
+            return GomGUI.getAllGoms();
+        });
+
+        get("/professeurs/", (req, res) -> {
+            String id = req.queryParams("id");
+            return ProfGUI.getOneProf(id).getFirstName()+" "+ProfGUI.getOneProf(id).getLastName();
+        });
+        
+        get("/login", (req, res) -> {
+            return "Le prof connecté est "+ LoginGUI.getConnectedProf();
+        });
+        
+        post("/login", (req, res) -> {
+            String id = req.queryParams("id");
+            LoginGUI.setConnectedProf(id);
+            return "Vous êtes connectés";
         });
 
         post("/users", (req, res) -> {
@@ -72,6 +99,22 @@ public class StartServer {
             return "Professeur "+user.getFirstName()+" enregisté";
         });
         
+        post("/gommettes", (req, res) -> {
+            GomEntity user= new GomEntity();
+
+            String name = req.queryParams("name");
+            String description = req.queryParams("description");
+            String color = req.queryParams("color");
+            //String id = req.queryParams("id");
+
+            //user.setId(Integer.parseInt(id));
+            user.setName(name);
+            user.setDescription(description);
+            user.setColor(color);
+            GomGUI.addGoms(user);
+            return "User "+user.getName()+" "+user.getColor()+" enregisté";
+        });
+
         delete("/users", (req, res) -> {
             UserEntity user= new UserEntity();
             String id = req.queryParams("id");
@@ -95,6 +138,14 @@ public class StartServer {
             EleveGUI.deleteEleves(user);
             return "Eleve "+id+" a été supprimé";
         });
+        delete("/gommettes", (req, res) -> {
+            GomEntity user= new GomEntity();
+            String id = req.queryParams("id");
+            user.setId(Integer.parseInt(id));
+            GomGUI.deleteGoms(user);
+            return "La gommette "+id+" a été supprimée";
+        });
+
 
 
         /*

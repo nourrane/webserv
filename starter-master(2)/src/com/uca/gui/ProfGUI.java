@@ -37,5 +37,9 @@ public class ProfGUI {
         
         ProfCore.deleteProfs(obj);
      }
+     public static ProfEntity getOneProf(String id) throws IOException, TemplateException {
+        
+        return ProfCore.GetOneProf(id);
+     }
     
 }

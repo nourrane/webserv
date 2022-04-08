@@ -20,5 +20,9 @@ public class ProfCore {
         ProfDAO u=new ProfDAO();
         u.delete(obj);
     }
+    public static ProfEntity GetOneProf(String id) {
+        ProfDAO u=new ProfDAO();
+        return u.getOneProf(id);
+    }
 
 }

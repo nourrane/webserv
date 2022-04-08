@@ -7,6 +7,24 @@ import java.util.ArrayList;
 
 public class ProfDAO extends _Generic<ProfEntity> {
 
+    public ProfEntity getOneProf(String id){
+        ProfEntity entity = new ProfEntity();
+        try {
+            PreparedStatement preparedStatement = this.connect.prepareStatement("SELECT * FROM professeurs WHERE id=?;");
+            preparedStatement.setString(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+
+                entity.setId(resultSet.getInt("id"));
+                entity.setFirstName(resultSet.getString("firstname"));
+                entity.setLastName(resultSet.getString("lastname"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return entity; 
+    }
+
     public ArrayList<ProfEntity> getAllProfs() {
         ArrayList<ProfEntity> entities = new ArrayList<>();
         try {
