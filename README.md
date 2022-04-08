@@ -1,8 +1,12 @@
 # webserv
 serveur gommette
 
-Fermer les anciens serveurs
+demarrer le serveur
+./gradlew run
+
+Fermer les anciens serveurs encore en marchent
 ps aux | grep gradlew
+kill -9 numDuProgramme
 
 ajouter un nouvel user
 curl -X POST "http://localhost:8081/users?firstname=a&lastname=b"
