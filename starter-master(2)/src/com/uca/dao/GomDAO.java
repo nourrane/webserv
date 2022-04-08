@@ -1,23 +1,23 @@
 package com.uca.dao;
 
-import com.uca.entity.UserEntity;
+import com.uca.entity.GomEntity;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-public class UserDAO extends _Generic<UserEntity> {
+public class GomDAO extends _Generic<GomEntity> {
 
-    public ArrayList<UserEntity> getAllUsers() {
-        ArrayList<UserEntity> entities = new ArrayList<>();
+    public ArrayList<GomEntity> getAllGoms() {
+        ArrayList<GomEntity> entities = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = this.connect.prepareStatement("SELECT * FROM users ORDER BY id ASC;");
+            PreparedStatement preparedStatement = this.connect.prepareStatement("SELECT * FROM goms ORDER BY id ASC;");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                UserEntity entity = new UserEntity();
+                GomEntity entity = new GomEntity();
                 entity.setId(resultSet.getInt("id"));
-                entity.setFirstName(resultSet.getString("firstname"));
-                entity.setLastName(resultSet.getString("lastname"));
-
+                entity.setName(resultSet.getString("name"));
+                entity.setDescription(resultSet.getString("description"));
+                entity.setColor(resultSet.getString("color"));
                 entities.add(entity);
             }
         } catch (SQLException e) {
@@ -28,15 +28,16 @@ public class UserDAO extends _Generic<UserEntity> {
     }
 
     @Override
-    public UserEntity create(UserEntity obj) {
+    public GomEntity create(GomEntity obj) {
         
         Connection connection = _Connector.getInstance();
         
         try {
             PreparedStatement statement;
-            statement = connection.prepareStatement("INSERT INTO users(firstname, lastname) VALUES(?, ?);");
-            statement.setString(1, obj.getFirstName());
-            statement.setString(2, obj.getLastName());
+            statement = connection.prepareStatement("INSERT INTO Goms(name, description, color) VALUES(?, ?,?);");
+            statement.setString(1, obj.getName());
+            statement.setString(2, obj.getDescription());
+            statement.setString(3, obj.getColor());
             statement.executeUpdate();
 
         } catch (SQLException e) {
@@ -47,18 +48,18 @@ public class UserDAO extends _Generic<UserEntity> {
     }
 
     @Override
-    public void delete(UserEntity obj) {
+    public void delete(GomEntity obj) {
         Connection connection = _Connector.getInstance();
         
         try {
             PreparedStatement statement;
-            statement = connection.prepareStatement("DELETE FROM users WHERE id=?;");
+            statement = connection.prepareStatement("DELETE FROM Goms WHERE id=?;");
             statement.setString(1,""+obj.getId());
             statement.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println(e.toString());
-            throw new RuntimeException("could not delete the user!");
+            throw new RuntimeException("could not delete the Gom!");
         }
     }
 }

@@ -23,7 +23,8 @@ public class UserGUI {
         input.put("users", UserCore.getAllUsers());
 
         Writer output = new StringWriter();
-        Template template = configuration.getTemplate("users/users.ftl");
+       Template template = configuration.getTemplate("users/users.ftl");
+       //Template template = configuration.getTemplate("goms/goms.ftl");
         template.setOutputEncoding("UTF-8");
         template.process(input, output);
 
@@ -33,4 +34,9 @@ public class UserGUI {
         
         return UserCore.addUsers(obj);
     }
+    public static void deleteUsers(UserEntity obj) throws IOException, TemplateException {
+        
+       UserCore.deleteUsers(obj);
+    }
+    
 }
