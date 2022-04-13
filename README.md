@@ -18,3 +18,4 @@ Pour supprimer un eleve
 curl -X DELETE "http://localhost:8081/eleves?id=12"
 
 alt -z : saute une ligne sur vscode
+ctr maj bar  ou ctr k c : mettre tout en commentaire
