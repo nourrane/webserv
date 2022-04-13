@@ -16,3 +16,5 @@ curl -X GET "http://localhost:8081/eleves"
 
 Pour supprimer un eleve
 curl -X DELETE "http://localhost:8081/eleves?id=12"
+
+alt -z : saute une ligne sur vscode
