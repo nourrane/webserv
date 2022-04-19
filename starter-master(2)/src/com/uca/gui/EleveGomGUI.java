@@ -3,6 +3,10 @@ package com.uca.gui;
 import com.uca.core.EleveCore;
 import com.uca.entity.EleveEntity;
 
+
+import com.uca.core.EleveGomCore;
+import com.uca.entity.EleveGomEntity;
+
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -13,33 +17,29 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EleveGUI {
+public class EleveGomGUI {
     
-    public static String getAllEleves() throws IOException, TemplateException {
+    public static String getAllElevesGom() throws IOException, TemplateException {
         Configuration configuration = _FreeMarkerInitializer.getContext();
 
         Map<String, Object> input = new HashMap<>();
 
-        input.put("eleves", EleveCore.getAllEleves());
+        input.put("eleveGom", EleveGomCore.getAllElevesGom());
 
         Writer output = new StringWriter();
-        Template template = configuration.getTemplate("eleves.ftl");
+        Template template = configuration.getTemplate("elevesGom.ftl");
         template.setOutputEncoding("UTF-8");
         template.process(input, output);
 
         return output.toString();
     }
-    public static EleveEntity addEleves(EleveEntity obj) throws IOException, TemplateException {
+    public static EleveGomEntity addEleveGom(EleveGomEntity obj) throws IOException, TemplateException {
         
-        return EleveCore.addEleve(obj);
+        return EleveGomCore.addEleveGom(obj);
     }
-    public static void deleteEleves(EleveEntity obj) throws IOException, TemplateException {
+    public static void deleteEleveGom(EleveGomEntity obj) throws IOException, TemplateException {
         
-        EleveCore.deleteEleve(obj);
-     }
-     public static EleveEntity getOneEleve(String id) throws IOException, TemplateException {
-        
-        return EleveCore.GetOneEleve(id);
+        EleveGomCore.deleteEleveGom(obj);
      }
     
 }

@@ -18,6 +18,7 @@ public class ProfDAO extends _Generic<ProfEntity> {
                 entity.setId(resultSet.getInt("id"));
                 entity.setFirstName(resultSet.getString("firstname"));
                 entity.setLastName(resultSet.getString("lastname"));
+                entity.setPassword(resultSet.getString("password"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -28,7 +29,7 @@ public class ProfDAO extends _Generic<ProfEntity> {
     public ArrayList<ProfEntity> getAllProfs() {
         ArrayList<ProfEntity> entities = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = this.connect.prepareStatement("SELECT * FROM professeurs ORDER BY id ASC;");
+            PreparedStatement preparedStatement = this.connect.prepareStatement("SELECT id, firstname, lastname FROM professeurs ORDER BY id ASC;");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 ProfEntity entity = new ProfEntity();
@@ -52,9 +53,10 @@ public class ProfDAO extends _Generic<ProfEntity> {
         
         try {
             PreparedStatement statement;
-            statement = connection.prepareStatement("INSERT INTO professeurs(firstname, lastname) VALUES(?, ?);");
+            statement = connection.prepareStatement("INSERT INTO professeurs(firstname, lastname, password) VALUES(?, ?,?);");
             statement.setString(1, obj.getFirstName());
             statement.setString(2, obj.getLastName());
+            statement.setString(3, obj.getPassword());
             statement.executeUpdate();
 
         } catch (SQLException e) {

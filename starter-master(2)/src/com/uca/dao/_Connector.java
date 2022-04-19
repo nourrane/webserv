@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class _Connector {
 
-    private static String url = "jdbc:h2:~/test";
+    private static String url = "jdbc:h2:/home/nourrane/database";
 
     private static String user = "sa";
 

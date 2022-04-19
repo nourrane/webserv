@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 public class ProfEntity {
     private String firstName;
     private String lastName;
+    private String password;
     private int id;
 
     public ProfEntity() {
@@ -33,5 +34,11 @@ public class ProfEntity {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+    public void setPassword(String pass) {
+        this.password=pass;
+    }
+    public String getPassword() {
+        return password;
     }
 }

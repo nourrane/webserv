@@ -21,4 +21,9 @@ public class EleveCore {
         u.delete(obj);
     }
 
+    public static EleveEntity GetOneEleve(String id) {
+        EleveDAO u=new EleveDAO();
+        return u.getOneEleve(id);
+    }
+
 }

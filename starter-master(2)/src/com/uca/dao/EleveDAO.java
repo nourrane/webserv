@@ -6,6 +6,23 @@ import java.util.ArrayList;
 
 public class EleveDAO extends _Generic<EleveEntity> {
 
+    public EleveEntity getOneEleve(String id){
+        EleveEntity entity = new EleveEntity();
+        try {
+            PreparedStatement preparedStatement = this.connect.prepareStatement("SELECT * FROM eleves WHERE id=?;");
+            preparedStatement.setString(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+
+                entity.setId(resultSet.getInt("id"));
+                entity.setFirstName(resultSet.getString("firstname"));
+                entity.setLastName(resultSet.getString("lastname"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return entity; 
+    }
     public ArrayList<EleveEntity> getAllEleves() {
         ArrayList<EleveEntity> entities = new ArrayList<>();
         try {

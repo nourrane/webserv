@@ -32,8 +32,8 @@ public class GomEntity {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescription(String des) {
+        this.description = des;
     }
     public String getColor() {
         return color;

@@ -14,16 +14,25 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginGUI {
-    
-    public static String getConnectedProf()  throws IOException, TemplateException {
-        LoginCore l=new LoginCore();
-        ProfEntity p=l.getConnectedProf();
-        return p.getId()+ " "+p.getFirstName()+ " "+ p.getLastName();
+import spark.*;
 
+public class LoginGUI {
+
+    public static String getLogin(Request req)  throws IOException, TemplateException {
+        Configuration configuration = _FreeMarkerInitializer.getContext();
+        Writer output = new StringWriter();
+        Template template = configuration.getTemplate("login.ftl");
+        template.setOutputEncoding("UTF-8");
+
+        Map<String, Object> input = new HashMap<>();
+        if(req.session().attributes()!=null){
+            input.put("id", req.session().attribute("id"));
+            String s=req.session().attribute("id");
+            ProfEntity p = new ProfCore().GetOneProf(s);
+            input.put("professeurs",p);
+        }        
+        template.process(input,output);
+        return output.toString();
     }
-    public static void setConnectedProf(String id)  throws IOException, TemplateException {
-        LoginCore.setConnectedProf(id);
-    }
-    
+
 }

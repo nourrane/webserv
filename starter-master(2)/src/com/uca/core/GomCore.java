@@ -21,5 +21,9 @@ public class GomCore {
         GomDAO u=new GomDAO();
         u.delete(obj);
     }
+    public static GomEntity GetOneGom(String id) {
+        GomDAO u=new GomDAO();
+        return u.getOneGom(id);
+    }
 
 }

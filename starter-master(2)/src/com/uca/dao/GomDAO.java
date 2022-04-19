@@ -7,6 +7,24 @@ import java.util.ArrayList;
 
 public class GomDAO extends _Generic<GomEntity> {
 
+    public GomEntity getOneGom(String id){
+        GomEntity entity = new GomEntity();
+        try {
+            PreparedStatement preparedStatement = this.connect.prepareStatement("SELECT * FROM goms WHERE id=?;");
+            preparedStatement.setString(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+
+                entity.setId(resultSet.getInt("id"));
+                entity.setName(resultSet.getString("name"));
+                entity.setDescription(resultSet.getString("description"));
+                entity.setColor(resultSet.getString("color"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return entity; 
+    }
     public ArrayList<GomEntity> getAllGoms() {
         ArrayList<GomEntity> entities = new ArrayList<>();
         try {

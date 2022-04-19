@@ -24,5 +24,8 @@ public class ProfCore {
         ProfDAO u=new ProfDAO();
         return u.getOneProf(id);
     }
+    public static String showErrorConnection(){
+        return "Il faut être connecté en tant que professeur pour effectuer cette action\n";
+    };
 
 }

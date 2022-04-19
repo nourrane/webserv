@@ -23,7 +23,7 @@ public class ProfGUI {
         input.put("professeurs", ProfCore.getAllProfs());
 
         Writer output = new StringWriter();
-        Template template = configuration.getTemplate("professeurs/professeurs.ftl");
+        Template template = configuration.getTemplate("professeurs.ftl");
         template.setOutputEncoding("UTF-8");
         template.process(input, output);
 
@@ -41,5 +41,15 @@ public class ProfGUI {
         
         return ProfCore.GetOneProf(id);
      }
+    
+    
+     public static String getIndex()  throws IOException, TemplateException {
+        Configuration configuration = _FreeMarkerInitializer.getContext();
+        Writer output = new StringWriter();
+        Template template = configuration.getTemplate("index.ftl");
+        template.setOutputEncoding("UTF-8");
+        //template.process(output);
+        return template.toString();
+    }
     
 }
