@@ -1,5 +1,4 @@
--supprimer élève/gommette qui est foreign key dans l'attribution des gommettes à une gommette
--lister un élève avec ces gommettes
--supprimer gommette à un élève
--date de naissance élève
--nettoyer code
+-supprimer élève/gommette en vérifiant qui toutes les élève/gommette soient associés dans eleveGom se supprime aussi(pas commencer)
+-lister un élève avec ces gommettes(en cours)
+-date de eleveGom et date de naissance élève(pas commencer)
+-nettoyer code(en cours)
