@@ -1,5 +1,0 @@
--supprimer élève/gommette en vérifiant qui toutes les élève/gommette soient associés dans eleveGom se supprime aussi(pas commencer)
--lister un élève avec ces gommettes(en cours)
--date de eleveGom et date de naissance élève(pas commencer)
--nettoyer code(en cours)
--css(en cours)
