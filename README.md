@@ -19,3 +19,10 @@ curl -X DELETE "http://localhost:8081/eleves?id=12"
 
 alt -z : saute une ligne sur vscode
 ctr maj bar  ou ctr k c : mettre tout en commentaire
+
+# Ce qui nous reste a faire:
+
+-supprimer élève/gommette en vérifiant qui toutes les élève/gommette soient associés dans eleveGom se supprime aussi(pas commencer)
+-date de eleveGom et date de naissance élève(pas commencer) + afficher les deux quand il y en a besoin
+-nettoyer code(en cours)
+-css(en cours)
