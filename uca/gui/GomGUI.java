@@ -1,8 +1,9 @@
 package com.uca.gui;
 
-
+import com.uca.core.EleveGomCore;
 import com.uca.core.GomCore;
 import com.uca.entity.GomEntity;
+import com.uca.entity.EleveGomEntity;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -13,7 +14,7 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.ArrayList;
 import spark.*;
 
 
@@ -77,6 +78,15 @@ public class GomGUI {
 
         return output.toString();
     }
+
+    public static void DeleteAllEleveGomWithIdGomGUI(String idGom) throws IOException, TemplateException {
+        ArrayList<EleveGomEntity> input = EleveGomCore.getAllElevesGomWithIdGom(idGom);
+        for (EleveGomEntity e : input){
+            EleveGomCore.deleteEleveGom(e);
+        }
+    }
+
+
     public static String getAllGomCreate(Request req) throws IOException, TemplateException {
         Configuration configuration = _FreeMarkerInitializer.getContext();
 

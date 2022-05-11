@@ -50,6 +50,28 @@ public class EleveGomDAO extends _Generic<EleveGomEntity> {
         }
         return entities; 
     }
+
+    public ArrayList<EleveGomEntity> getAllEleveGomWithIdGom(String idGom){
+        ArrayList<EleveGomEntity> entities = new ArrayList<>();
+        System.out.println("dao34");
+        try {
+            PreparedStatement preparedStatement = this.connect.prepareStatement("SELECT * FROM eleveGom WHERE idGom=? ORDER BY id ASC;");
+            preparedStatement.setString(1, idGom);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                EleveGomEntity entity = new EleveGomEntity();
+                entity.setId(resultSet.getInt("id"));
+                entity.setIdEleve(resultSet.getInt("idEleve"));
+                entity.setIdGommette(resultSet.getInt("idGom"));
+                entity.setDate(resultSet.getString("date"));
+                entity.setMotif(resultSet.getString("motif"));
+                entities.add(entity);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return entities; 
+    }
     public ArrayList<EleveGomEntity> getAllElevesGom() {
         ArrayList<EleveGomEntity> entities = new ArrayList<>();
         try {

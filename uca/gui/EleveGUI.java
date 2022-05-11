@@ -61,7 +61,8 @@ public class EleveGUI {
         Map<String, Object> input = new HashMap<>();
 
         if(req.cookie("CurrentUser")!=null){
-            input.put("id", req.cookie("CurrentUser"));
+            String idEleve=req.cookie("CurrentUser");
+            input.put("id",idEleve );
         }  
 
         input.put("eleves", EleveCore.getAllEleves());
@@ -74,6 +75,7 @@ public class EleveGUI {
 
         return output.toString();
     }
+
     public static String getAllElevesCreate(Request req) throws IOException, TemplateException {
         Configuration configuration = _FreeMarkerInitializer.getContext();
 

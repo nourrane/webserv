@@ -27,6 +27,11 @@ public class EleveGomCore {
     }
     
     public static ArrayList<EleveGomEntity> getAllElevesGomWithIdEleve(String idEleve) {
+        
         return new EleveGomDAO().getAllEleveGomWithIdEleve(idEleve);
+    }
+
+    public static ArrayList<EleveGomEntity> getAllElevesGomWithIdGom(String idGom) {
+        return new EleveGomDAO().getAllEleveGomWithIdGom(idGom);
     }
 }

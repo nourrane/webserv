@@ -16,6 +16,7 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ArrayList;
 
 import spark.*;
 
@@ -55,10 +56,22 @@ public class EleveGomGUI {
         Writer output = new StringWriter();
         Template template = configuration.getTemplate("ChercherEleveGom.ftl");
         template.setOutputEncoding("UTF-8");
-        System.out.println("GUI52");
         template.process(input, output);
-        System.out.println("GUI53");
+
         return output.toString();
+    }
+    public static void DeleteAllEleveGomWithIdEleveGUI(String idEleve) throws IOException, TemplateException {
+        ArrayList<EleveGomEntity> input = EleveGomCore.getAllElevesGomWithIdEleve(idEleve);
+        for (EleveGomEntity e : input){
+            EleveGomCore.deleteEleveGom(e);
+        }
+    }
+
+    public static void DeleteAllEleveGomWithIdGomGUI(String idGom) throws IOException, TemplateException {
+        ArrayList<EleveGomEntity> input = EleveGomCore.getAllElevesGomWithIdGom(idGom);
+        for (EleveGomEntity e : input){
+            EleveGomCore.deleteEleveGom(e);
+        }
     }
 
 

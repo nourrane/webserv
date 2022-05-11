@@ -132,11 +132,15 @@ public class StartServer {
             //return "Eleve "+user.getFirstName()+" enregisté";
         });
 
+
+        /***
+         * Attention modification
+         */
         post("/eleves/delete", (req, res) -> {
 
             EleveEntity user= new EleveEntity();
             String id = req.queryParams("id");
-
+            EleveGomGUI.DeleteAllEleveGomWithIdEleveGUI(id);
             user.setId(Integer.parseInt(id));
             EleveCore.deleteEleve(user);
             res.redirect("/eleves/delete");
@@ -270,7 +274,7 @@ public class StartServer {
 
             GomEntity user= new GomEntity();
             String id = req.queryParams("id");
-
+            EleveGomGUI.DeleteAllEleveGomWithIdGomGUI(id);
             user.setId(Integer.parseInt(id));
             GomCore.deleteGom(user);
             res.redirect("/gommettes/delete");
