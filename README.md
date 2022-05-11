@@ -25,3 +25,4 @@ ctr maj bar  ou ctr k c : mettre tout en commentaire
 - date de eleveGom(pas commencer) + afficher quand il y en a besoin//
 - nettoyer code(en cours)
 - css(en cours)
+- supprimer gommettes 
