@@ -22,7 +22,7 @@ ctr maj bar  ou ctr k c : mettre tout en commentaire
 
 # Ce qui nous reste a faire:
 
-- date de eleveGom(pas commencer) + afficher quand il y en a besoin//
+
 - nettoyer code(en cours)
-- css(en cours)
-- supprimer gommettes 
+
+- AJOUTER PROF DANS attributions + jointure idEleve pour recupere nom eleve
