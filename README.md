@@ -22,8 +22,8 @@ ctr maj bar  ou ctr k c : mettre tout en commentaire
 
 # Ce qui nous reste a faire:
 
--supprimer élève/gommette en vérifiant qui toutes les élève/gommette soient associés dans eleveGom se supprime aussi(pas commencer)
--date de eleveGom(pas commencer) + afficher quand il y en a besoin//
--nettoyer code(en cours)
--css(en cours)
+- supprimer élève/gommette en vérifiant qui toutes les élève/gommette soient associés dans eleveGom se supprime aussi(pas commencer)
+- date de eleveGom(pas commencer) + afficher quand il y en a besoin//
+- nettoyer code(en cours)
+- css(en cours)
 - proposer uniquement des utilisateur et gommettes existentes pour creation attribution gommettes
