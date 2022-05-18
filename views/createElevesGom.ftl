@@ -1,28 +1,60 @@
 <#ftl encoding="utf-8">
+<head>
+    <link href="/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+</head>
 
 <body xmlns="http://www.w3.org/1999/html">
 
- <h1>Espace de gommettes des élèves</h1>
-    <p>Espace ajout une gommette a un élève</p>
-        <form action="/elevesGom/create" method="post">
+    <div id="main">
+    <br/>
 
-        <div>Identifiant de l'élève :</div>
-        <input type="text" name="idEleve" required/>
-        <br/><br/>
-        <div>Identifiant de la gommette :</div>
-        <input type="text" name="idGom" required/>
-        <br/><br/>
-        <div>Date :</div>
-        <input type="text" name="date" required/>
-        <br/><br/>
-        <div>Motif :</div>
-        <textarea type="text" name="motif" required/>
-        </textarea>
-        <br/><br/>
-        <input type="submit" value="Submit"/>
-        <input type="reset" value="Reset"/>
-    </form>
-    <a href="/elevesGom"> Retour à la page précédente</a> <br/>
+        <header>
+            <h1>Ajout de gommette à un élève</h1>
+        </header>
+        <br/>
+         <nav>
+      <ul>
+          <li><a href="/index"><i class="fa fa-home"></i></a></li>
+          <li><a href="/professeurs">Professeurs</a></li>
+          <li><a href="/eleves">Élèves</a></li>
+          <li><a href="/gommettes">Gommettes</a></li>
+          <li><a href="/elevesGom">Attributions</a></li>
+      </ul>
+  </nav>
+
+            <form action="/elevesGom/create" method="post">
+
+
+                <label for="idEleve">Identifiant de l'élève</label>
+                <br/><br/>
+                <select name="idEleve" required >
+                    <#list eleves as e>
+                        <option value=${e.id}>${e.id}</option>
+                    </#list>
+                </select>
+            <br/>
+                <label for="idGom">Identifiant de la gommette</label>
+                <br/><br/>
+                <select name="idGom" required >
+                    <#list goms as gom>
+                        <option value=${gom.id}>${gom.id}</option>
+                    </#list>
+                </select>
+            <br/>
+                <div>Date :</div>
+                <input type="date" name="date" required/>
+            <br/>
+                <label for="Motif">Motif :</label>
+                <input type="text" name="motif" required/>
+            <br/>
+            <div class="b">
+               <input class="buttons" type="submit" value="Valider"/>
+                <input class="buttons" type="reset" value="Réinitialiser"/>
+            </div>
+        </form>
+        <a href="/elevesGom"> Retour à la page précédente</a> <br/>
+    </div>
 
 </body>
 

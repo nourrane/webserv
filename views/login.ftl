@@ -1,34 +1,59 @@
 <#ftl encoding="utf-8">
 
-<body xmlns="http://www.w3.org/1999/html">
-    <nav>
-        <ul>
-          <li><a href="/index">Index</a></li>
-          <li><a href="/professeurs">Espace Professeurs</a></li>
-          <li><a href="/eleves">Liste Elèves</a></li>
-          <li><a href="/gommettes">Liste Gommettes</a></li>
-            <li><a href="/elevesGom">Liste d'attribution des gommettes à un élève</a></li>
-        </ul>
-    </nav>
+<head>
+    <link href="/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+</head>
 
-    <h1>Formulaire de connexion des profs</h1>
+<body xmlns="http://www.w3.org/1999/html">
+    <div id="main">
+    <br/>
+
+        <header>
+            <h1>Formulaire de connexion des profs</h1>
+        </header>
+        <br/>
+     <nav>
+      <ul>
+          <li><a href="/index"><i class="fa fa-home"></i></a></li>
+          <li><a href="/professeurs">Professeurs</a></li>
+          <li><a href="/eleves">Élèves</a></li>
+          <li><a href="/gommettes">Gommettes</a></li>
+          <li><a href="/elevesGom">Attributions</a></li>
+      </ul>
+  </nav>
+
     <#if id?? >
-        Connexion en cours<br>
-        firstName: ${professeurs.firstName}<br>
-        lastName: ${professeurs.lastName}<br>
-        <a href="/removeCookies">Deconnexion</a>
+        Vous êtes connecté<br>
+        Prénom: ${professeurs.firstName}<br>
+        Nom: ${professeurs.lastName}<br>
+        <li><a href="/removeCookies">Deconnexion</a></li>
     <#else>
+        <#if incorrect??> 
+        <p class="error">Votre nom d'utilisateur ou mot de passe est incorrect. <p>
+        </#if>
         <form action="/login" method="post">
-            <div>Id du professeur:</div>
+
+        <div>
+            <label for="Identifiant du professeur">Identifiant du professeur :</label>
             <input type="text" id="id" name="id" required/>
-            <br/><br/>
-            <div>password:</div>
+        </div>
+        <br/>
+        <div>
+            <label for="Mot de passe">Mot de passe :</label>
             <input type="password" id="password" name="password" required/>
-            <br/><br/>
-            <input type="submit" value="Submit"/>
-            <input type="reset" value="Reset"/>
+        </div>
+        <br/>
+        <div class="b">
+            <input class="buttons" type="submit" value="Valider"/>
+            <input class="buttons" type="reset" value="Réinitialiser"/>
+        </div>
         </form>
     </#if>
+    </div>
+
+
 </body>
 </html>
+
 

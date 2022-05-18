@@ -1,27 +1,43 @@
 <#ftl encoding="utf-8">
 <head>
-    <link href="/deleteEleve.css" rel="stylesheet">
+    <link href="/style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 </head>
 <body xmlns="http://www.w3.org/1999/html">
- <h1>Espace élèves</h1>
+ <div id="main">
+    <br/>
 
-         <p>Espace suppression élève</p>
-        <form action="/eleves/delete" method="post">
+        <header>
+            <h1>Suppression d'un élève</h1>
+        </header>
+        <br/>
+         <nav>
+      <ul>
+          <li><a href="/index"><i class="fa fa-home"></i></a></li>
+          <li><a href="/professeurs">Professeurs</a></li>
+          <li><a href="/eleves">Élèves</a></li>
+          <li><a href="/gommettes">Gommettes</a></li>
+          <li><a href="/elevesGom">Attributions</a></li>
+      </ul>
+  </nav>
 
-        <label for="id">Identifiant de l'élève</label>
-        <br/><br/>
-        <select name="id" required >
-            <#list eleves as eleve>
-                <option value=${eleve.id}>${eleve.id}</option>
-            </#list>
-        </select>
+            <form action="/eleves/delete" method="post">
 
-        <br/><br/>
-        <input type="submit" value="Submit"/>
-        <input type="reset" value="Reset"/>
-    </form>
-    <a href="/eleves"> Retour à la page précédente</a> <br/>
+            <div>
+                <label for="Identifiant de l'élève">Identifiant de l'élève :</label>
+                <select name="id" required >
+                    <#list eleves as eleve>
+                        <option value=${eleve.id}>${eleve.id}</option>
+                    </#list>
+                </select>
+            </div>
+            <br/>
+            <div class="b">
+                <input class="buttons" type="submit" value="Valider"/>
+            </div>
+        </form>
+        <a href="/eleves"> Retour à la page précédente</a> <br/>
+    </div>
 
 </body>
 

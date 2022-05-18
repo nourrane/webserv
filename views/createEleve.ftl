@@ -1,24 +1,48 @@
 <#ftl encoding="utf-8">
 
+<head>
+    <link href="/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+</head>
 
 <body xmlns="http://www.w3.org/1999/html">
 
- <h1>Espace élèves</h1>
+    <div id="main">
+    <br/>
 
-    <p>Espace ajout élève</p>
-        <form action="/eleves/create" method="post">
+        <header>
+            <h1>Création élève</h1>
+        </header>
+        <br/>
+        <nav>
+      <ul>
+          <li><a href="/index"><i class="fa fa-home"></i></a></li>
+          <li><a href="/professeurs">Professeurs</a></li>
+          <li><a href="/eleves">Élèves</a></li>
+          <li><a href="/gommettes">Gommettes</a></li>
+          <li><a href="/elevesGom">Attributions</a></li>
+      </ul>
+    </nav>
 
-        <div>Prénom de l'élève :</div>
-        <input type="text" name="firstname" required/>
-        <br/><br/>
-        <div>Nom de l'élève :</div>
-        <input type="text" name="lastname" required/>
-        <br/><br/>
-        <input type="submit" value="Submit"/>
-        <input type="reset" value="Reset"/>
-    </form>
-    <a href="/eleves"> Retour à la page précédente</a> <br/>
+            <form action="/eleves/create" method="post">
 
+            <div>
+                <label for="Prénom de l'élève">Prénom de l'élève :</label>
+                <input type="text" name="firstname" required/>
+            </div>
+            <br/>
+            <div>
+                <label for="Nom de l'élève">Nom de l'élève :</label>
+                <input type="text" name="lastname" required/>
+            </div>
+            <br/>
+            <div class="b">
+                <input class="buttons" type="submit" value="Valider"/>
+                <input class="buttons" type="reset" value="Réinitialiser"/>
+            </div>
+        </form>
+        <a href="/eleves"> Retour à la page précédente</a> <br/>
+    </div>
 </body>
 
 </html>
