@@ -1,11 +1,7 @@
 package com.uca.gui;
 
-import com.uca.core.EleveCore;
-import com.uca.entity.EleveEntity;
-
-
-import com.uca.core.EleveGomCore;
-import com.uca.entity.EleveGomEntity;
+import com.uca.core.*;
+import com.uca.entity.*;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -43,18 +39,16 @@ public class EleveGomGUI {
     public static String getAllEleveGomWithIdEleveGUI(String idEleve) throws IOException, TemplateException {
         Configuration configuration = _FreeMarkerInitializer.getContext();
         Map<String, Object> input = new HashMap<>();
-        System.out.println("45"+idEleve);
 
         input.put("eleves", EleveCore.getAllEleves());
         
         if (idEleve!=null){
-            System.out.println("GUI49bis");
             input.put("eleveChoisi", EleveCore.getOneEleve(idEleve));
             input.put("eleveGomSpe", EleveGomCore.getAllElevesGomWithIdEleve(idEleve));
         }
 
         Writer output = new StringWriter();
-        Template template = configuration.getTemplate("ChercherEleveGom.ftl");
+        Template template = configuration.getTemplate("chercherEleveGom.ftl");
         template.setOutputEncoding("UTF-8");
         template.process(input, output);
 
@@ -75,7 +69,7 @@ public class EleveGomGUI {
     }
 
 
-    public static String getAllElevesGomCreate(Request req) throws IOException, TemplateException {
+    public static String getAllElevesGomCreate(Request req, String idEleve, String idGom) throws IOException, TemplateException {
         Configuration configuration = _FreeMarkerInitializer.getContext();
 
         Map<String, Object> input = new HashMap<>();
@@ -85,6 +79,14 @@ public class EleveGomGUI {
         }  
 
         input.put("eleveGom", EleveGomCore.getAllElevesGom());
+        input.put("eleves", EleveCore.getAllEleves());
+        input.put("goms", GomCore.getAllGoms());
+        
+        if (idEleve!=null && idGom!=null){
+            input.put("eleveChoisi", EleveCore.getOneEleve(idEleve));
+            input.put("gomChoisi", GomCore.getOneGom(idGom));
+            input.put("eleveGomSpe", EleveGomCore.getAllElevesGomWithIdEleve(idEleve));
+        }
 
         Writer output = new StringWriter();
 
@@ -110,3 +112,4 @@ public class EleveGomGUI {
         return output.toString();
     }
 }
+

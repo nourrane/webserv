@@ -1,6 +1,5 @@
 package com.uca.gui;
 
-
 import com.uca.core.LoginCore;
 import com.uca.core.ProfCore;
 import com.uca.entity.ProfEntity;
@@ -19,7 +18,7 @@ import spark.*;
 
 public class LoginGUI {
 
-    public static String getLogin(Request req)  throws IOException, TemplateException {
+    public static String getLogin(Request req, Response res)  throws IOException, TemplateException {
         Configuration configuration = _FreeMarkerInitializer.getContext();
 
         Writer output = new StringWriter();
@@ -27,12 +26,15 @@ public class LoginGUI {
         template.setOutputEncoding("UTF-8");
 
         Map<String, Object> input = new HashMap<>();
-        if(req.session().attributes()!=null){
+        if(req.session().attribute("id")!=null){
             input.put("id", req.session().attribute("id"));
             String s=req.session().attribute("id");
             ProfEntity p = new ProfCore().getOneProf(s);
             input.put("professeurs",p);
-        }        
+        }     
+        else if (req.cookies()!=null){
+            input.put("incorrect", req.cookie("incorrect"));
+        }     
         template.process(input,output);
         return output.toString();
     }

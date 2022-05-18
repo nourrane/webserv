@@ -20,6 +20,8 @@ public class EleveGomDAO extends _Generic<EleveGomEntity> {
                 entity.setIdEleve(resultSet.getInt("idEleve"));
                 entity.setIdGommette(resultSet.getInt("idGom"));
                 entity.setDate(resultSet.getString("date"));
+                entity.setIdProf(resultSet.getInt("idProf"));
+                System.out.println("EleveGomDao24");
                 entity.setMotif(resultSet.getString("motif"));
 
             }
@@ -31,7 +33,6 @@ public class EleveGomDAO extends _Generic<EleveGomEntity> {
 
       public ArrayList<EleveGomEntity> getAllEleveGomWithIdEleve(String idEleve){
         ArrayList<EleveGomEntity> entities = new ArrayList<>();
-        System.out.println("dao34");
         try {
             PreparedStatement preparedStatement = this.connect.prepareStatement("SELECT * FROM eleveGom WHERE idEleve=? ORDER BY id ASC;");
             preparedStatement.setString(1, idEleve);
@@ -43,6 +44,7 @@ public class EleveGomDAO extends _Generic<EleveGomEntity> {
                 entity.setIdGommette(resultSet.getInt("idGom"));
                 entity.setDate(resultSet.getString("date"));
                 entity.setMotif(resultSet.getString("motif"));
+                entity.setIdProf(resultSet.getInt("idProf"));
                 entities.add(entity);
             }
         } catch (SQLException e) {
@@ -53,7 +55,6 @@ public class EleveGomDAO extends _Generic<EleveGomEntity> {
 
     public ArrayList<EleveGomEntity> getAllEleveGomWithIdGom(String idGom){
         ArrayList<EleveGomEntity> entities = new ArrayList<>();
-        System.out.println("dao34");
         try {
             PreparedStatement preparedStatement = this.connect.prepareStatement("SELECT * FROM eleveGom WHERE idGom=? ORDER BY id ASC;");
             preparedStatement.setString(1, idGom);
@@ -63,6 +64,7 @@ public class EleveGomDAO extends _Generic<EleveGomEntity> {
                 entity.setId(resultSet.getInt("id"));
                 entity.setIdEleve(resultSet.getInt("idEleve"));
                 entity.setIdGommette(resultSet.getInt("idGom"));
+                entity.setIdProf(resultSet.getInt("idProf"));
                 entity.setDate(resultSet.getString("date"));
                 entity.setMotif(resultSet.getString("motif"));
                 entities.add(entity);
@@ -82,6 +84,7 @@ public class EleveGomDAO extends _Generic<EleveGomEntity> {
                 entity.setId(resultSet.getInt("id"));
                 entity.setIdEleve(resultSet.getInt("idEleve"));
                 entity.setIdGommette(resultSet.getInt("idGom"));
+                entity.setIdProf(resultSet.getInt("idProf"));
                 entity.setDate(resultSet.getString("date"));
                 entity.setMotif(resultSet.getString("motif"));                
                 entities.add(entity);
@@ -100,11 +103,12 @@ public class EleveGomDAO extends _Generic<EleveGomEntity> {
         
         try {
             PreparedStatement statement;
-            statement = connection.prepareStatement("INSERT INTO eleveGom(idEleve, idGom, date, motif) VALUES(?, ?, ?, ?);");
+            statement = connection.prepareStatement("INSERT INTO eleveGom(idEleve, idGom, date, motif, idProf) VALUES(?, ?, ?, ?, ?);");
             statement.setInt(1, obj.getEleve().getId());
             statement.setInt(2, obj.getGommette().getId());
             statement.setString(3, obj.getDate());  
             statement.setString(4, obj.getMotif());
+            statement.setInt(5, obj.getProf().getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.toString());
@@ -123,7 +127,6 @@ public class EleveGomDAO extends _Generic<EleveGomEntity> {
             PreparedStatement statement;
             statement = connection.prepareStatement("DELETE FROM eleveGom WHERE id=?;");
             statement.setString(1,""+obj.getId());
-            System.out.println("eleveGomdao"+obj.getId());
             statement.executeUpdate();
 
         } catch (SQLException e) {

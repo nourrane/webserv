@@ -1,19 +1,19 @@
 
  package com.uca.entity;
-import com.uca.core.EleveCore;
+import com.uca.core.*;
 import com.uca.entity.EleveEntity;
-import com.uca.core.GomCore;
 import java.sql.Timestamp;
 
-import com.uca.core.EleveCore;
 
 public class EleveGomEntity {
     private int id;
     private int idEleve;
     private int idGom;
+    private int idProf;
     private String date;
     private String motif;
     private EleveEntity Eleve;
+    private ProfEntity Prof;
     private GomEntity Gommette;
     
 
@@ -30,13 +30,15 @@ public class EleveGomEntity {
 
     public void setId(int id) {
         this.id = id;
-        
     }
 
     public EleveEntity getEleve() {
         return Eleve;
     }
 
+    public ProfEntity getProf() {
+        return Prof;
+    }
     public int getIdEleve() {
         return idEleve;
     }
@@ -48,10 +50,28 @@ public class EleveGomEntity {
         return Eleve.getLastName();
     }
 
+    public void setIdProf(int idProf) {
+        this.Prof=new ProfCore().getOneProf(""+idProf);
+        this.idProf=idProf;
+    }
+
+    public int getIdProf() {
+        return idProf;
+    }
+    public String getFirstNameProf(){
+        return Prof.getFirstName();
+    }
+
+    public String getLastNameProf(){
+        return Prof.getLastName();
+    }
+
     public void setIdEleve(int idEleve) {
         this.Eleve=new EleveCore().getOneEleve(""+idEleve);
         this.idEleve=idEleve;
     }
+
+    
 
     public GomEntity getGommette() {
         return Gommette;

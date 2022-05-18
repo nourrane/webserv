@@ -9,7 +9,6 @@ import java.util.ArrayList;
 public class GomCore {
 
     public static ArrayList<GomEntity> getAllGoms() {
-        //System.out.println(new GomDAO().getAllGoms().get(0).getColor());
         return new GomDAO().getAllGoms();
     }
 

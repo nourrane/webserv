@@ -76,8 +76,10 @@ public class StartServer {
                 req.session().removeAttribute("id");
                 res.redirect("/removeCookies");        
             }
-            else{res.redirect("/index");}
-            res.redirect("/index");
+            if (req.cookie("incorrect")!=null){
+                res.removeCookie("incorrect");           
+            }
+            res.redirect("/login");
             return " ";
         });
         /*  eleve   */
@@ -93,19 +95,7 @@ public class StartServer {
         });
         get("/eleves/create", (req, res) -> {
             return EleveGUI.getAllElevesCreate(req);
-        });        
-        get("/eleves/:id", (req, res) -> {
-            String id = req.params(":id");
-            return EleveCore.getOneEleve(id).getFirstName()+" "+EleveCore.getOneEleve(id).getLastName();
-        });
-
-        get("/eleves/modify/:id/:f/:l", (req, res) -> {
-            String id = req.params(":id");
-            String firstname = req.params(":f");
-            String lastname = req.params(":l");
-            
-            return EleveCore.modifyEleve(id, firstname, lastname).getFirstName()+" "+EleveCore.modifyEleve(id, firstname, lastname).getLastName();
-        });
+        }); 
 
         post("/eleves/create", (req, res) -> {
 
@@ -117,7 +107,6 @@ public class StartServer {
             EleveCore.addEleve(user);
             res.redirect("/eleves");
             return null;
-            //return "Eleve "+user.getFirstName()+" enregisté";
         });
 
         post("/eleves/modify", (req, res) -> {
@@ -127,15 +116,10 @@ public class StartServer {
             String lastname = req.queryParams("lastname");
 
             EleveCore.modifyEleve(id, firstname, lastname);
-            res.redirect("/eleves/modify");
+            res.redirect("/eleves");
             return null;
-            //return "Eleve "+user.getFirstName()+" enregisté";
         });
 
-
-        /***
-         * Attention modification
-         */
         post("/eleves/delete", (req, res) -> {
 
             EleveEntity user= new EleveEntity();
@@ -143,38 +127,15 @@ public class StartServer {
             EleveGomGUI.DeleteAllEleveGomWithIdEleveGUI(id);
             user.setId(Integer.parseInt(id));
             EleveCore.deleteEleve(user);
-            res.redirect("/eleves/delete");
+            res.redirect("/eleves");
             return null;
-            //return "Eleve "+user.getFirstName()+" enregisté";
         });
-
-
-        get("/eleves/:id/delete", (req, res) -> {
-            EleveEntity user= new EleveEntity();
-            String id = req.params("id");
-            user.setId(Integer.parseInt(id));
-            EleveCore.deleteEleve(user);
-            return "Eleve "+id+" a ete supprime";
-        });
-
 
         /*  professeurs   */
         get("/professeurs", (req, res) -> {
             return ProfGUI.getAllProfs();
         });
-        get("/professeurs/:id", (req, res) -> {
-            String id = req.params(":id");
-            return ProfCore.getOneProf(id).getFirstName()+" "+ProfCore.getOneProf(id).getLastName();
-        });
 
-        
-        get("/professeurs/:id/delete", (req, res) -> {
-            ProfEntity user= new ProfEntity();
-            String id = req.params("id");
-            user.setId(Integer.parseInt(id));
-            ProfCore.deleteProfs(user);
-            return "Professeur "+id+" a été supprimé";
-        });
         /*inscription*/
 
         post("/professeurs/create", (req, res) -> {
@@ -192,24 +153,26 @@ public class StartServer {
         
         /* se connecter */
         get("/login", (req, res) -> {
-            return LoginGUI.getLogin(req);
+            return LoginGUI.getLogin(req,res);
         });
 
         post("/login", (req, res) -> {
             String id = req.queryParams("id");
             String password = req.queryParams("password");
 
-            if (LoginCore.authentification(id,password)){
+            if (LoginCore.authentification(id, password)){
                 String name = "CurrentUser";
                 String value = id;
-                res.cookie(name, value);             // set cookie w
-
+                res.cookie(name, value);  
                 Session session=req.session(true);
                 req.session().attribute("id", id);
                 res.redirect("/professeurs");
                 
             }
-            else res.redirect("/login");
+            else {
+                res.cookie("incorrect", "0");
+                res.redirect("/login");
+            }
             return null;
         });
 
@@ -238,7 +201,7 @@ public class StartServer {
             user.setDescription(description);
             user.setColor(color);
             GomCore.addGom(user);
-            res.redirect("/gommettes/create");
+            res.redirect("/gommettes");
             return null;
             
         });
@@ -249,25 +212,8 @@ public class StartServer {
             String description = req.queryParams("description");
             String color = req.queryParams("color");
             GomCore.modifyGom(id, name, description, color);
-            res.redirect("/gommettes/modify");
+            res.redirect("/gommettes");
             return null;
-            //return "Gommette "+user.getname()+" enregisté";
-        });
-
-        get("/gommettes/:id/delete", (req, res) -> {
-            GomEntity user= new GomEntity();
-            String id = req.params("id");
-            user.setId(Integer.parseInt(id));
-            GomCore.deleteGom(user);
-            return "La gommette "+id+" a été supprimée";
-        });
-        get("/gommettes/modify/:id/:n/:d/:c", (req, res) -> {
-            String id = req.params(":id");
-            String name = req.params(":n");
-            String description = req.params(":d");
-            String color = req.params(":c");
-            
-            return GomCore.modifyGom(id, name, description, color).getName()+" "+GomCore.modifyGom(id, name, description, color).getDescription()+" "+GomCore.modifyGom(id, name, description, color).getColor();
         });
 
         post("/gommettes/delete", (req, res) -> {
@@ -277,7 +223,7 @@ public class StartServer {
             EleveGomGUI.DeleteAllEleveGomWithIdGomGUI(id);
             user.setId(Integer.parseInt(id));
             GomCore.deleteGom(user);
-            res.redirect("/gommettes/delete");
+            res.redirect("/gommettes");
             return null;
         });
 
@@ -286,7 +232,9 @@ public class StartServer {
             return EleveGomGUI.getAllElevesGom(req);
         }); 
         get("/elevesGom/create", (req, res) -> {
-            return EleveGomGUI.getAllElevesGomCreate(req);
+            String idEleve=req.session().attribute("idEleve");
+            String idGom=req.session().attribute("idGom");
+            return EleveGomGUI.getAllElevesGomCreate(req, idEleve, idGom);
         }); 
         get("/elevesGom/delete", (req, res) -> {
             return EleveGomGUI.getOneElevesGomDelete();
@@ -295,16 +243,16 @@ public class StartServer {
             EleveGomEntity e= new EleveGomEntity();
             e.setIdEleve(Integer.parseInt(req.queryParams("idEleve")));
             e.setIdGommette(Integer.parseInt(req.queryParams("idGom")));
+            e.setIdProf(Integer.parseInt(req.cookie("CurrentUser")));
             e.setDate(req.queryParams("date"));      
-            e.setMotif(req.queryParams("motif"));   
+            e.setMotif(req.queryParams("motif"));  
             EleveGomCore.addEleveGom(e);
-            res.redirect("/elevesGom/create");
+            res.redirect("/elevesGom");
             return null;
         });
 
         post("/elevesGom/delete", (req, res) -> {
             String id = req.queryParams("id");
-            System.out.println("eleveGomStart"+id);
             EleveGomEntity user= EleveGomCore.getOneEleveGom(id);
             EleveGomCore.deleteEleveGom(user);
             res.redirect("/elevesGom");
@@ -316,21 +264,12 @@ public class StartServer {
             return EleveGomGUI.getAllEleveGomWithIdEleveGUI(idEleve);
         }); 
         post("/elevesGom/recherche", (req, res) -> {
-            System.out.println("sart315");
             String idEleve = req.queryParams("idEleve");
-            //EleveEntity user= EleveCore.getOneEleveGom(idEleve);
-            //EleveGomCore.getAllElevesGomWithIdEleve(idEleve);
             Session session=req.session(true);
             req.session().attribute("idEleve", idEleve);
-            System.out.println("sart320");
             res.redirect("/elevesGom/recherche");
             return null;
         });
 
-
-      
-
-        
-       
     }
 }
