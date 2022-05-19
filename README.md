@@ -1,9 +1,9 @@
-# webserv
-serveur gommette
+## serveur gommette
 
 demarrer le serveur
-
+```bash
 ./gradlew run
+```
 
 Fermer les anciens serveurs encore en marche
 ```bash
@@ -23,9 +23,6 @@ Pour supprimer un eleve :
 **alt -z** : saute une ligne sur vscode.
 
 **ctr maj bar**  ou **ctr k c** : mettre tout en commentaire
-
-# Ce qu'il nous reste a faire:
-
 
 # Ce qui nous reste a faire:
 
