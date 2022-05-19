@@ -1,4 +1,4 @@
-## serveur gommette
+# serveur gommette
 
 demarrer le serveur
 ```bash
@@ -24,7 +24,7 @@ Pour supprimer un eleve :
 
 **ctr maj bar**  ou **ctr k c** : mettre tout en commentaire
 
-# Ce qui nous reste a faire:
+## Ce qu'il nous reste a faire:
 
 
 - nettoyer code(en cours)
