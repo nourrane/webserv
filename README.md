@@ -27,7 +27,7 @@ Pour supprimer un eleve :
 ## Ce qu'il nous reste a faire:
 
 
-- nettoyer code(en cours)
-- refaire les media query que j'ai bousillé avec la nouvelle mise en page
+- commentaire si besoin
 - faire le rapport
 - faire une recherche active des bugs possibles
+- refaire index ?
